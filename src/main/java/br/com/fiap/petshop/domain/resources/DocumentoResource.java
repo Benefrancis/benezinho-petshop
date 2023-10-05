@@ -33,7 +33,7 @@ public class DocumentoResource implements Resource<Documento, Long> {
     @GET
     @Path("/{id}")
     @Override
-    public Response findById(Long id) {
+    public Response findById(@PathParam( "id" ) Long id) {
         var documento = service.findById( id );
         if (Objects.isNull( documento )) return Response.status( 404 ).build();
         return Response.ok( documento ).build();

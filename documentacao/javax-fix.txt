@@ -1,0 +1,4 @@
+C:\Users\Francis\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar
+
+
+C:\Users\Francis\.m2\repository\org\hibernate\javax

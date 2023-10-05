@@ -33,7 +33,7 @@ public class ServicoResource implements Resource<Servico, Long> {
     @GET
     @Path("/{id}")
     @Override
-    public Response findById(Long id) {
+    public Response findById(@PathParam( "id" ) Long id) {
         var servico = service.findById( id );
         if (Objects.isNull( servico )) return Response.status( 404 ).build();
         return Response.ok( servico ).build();

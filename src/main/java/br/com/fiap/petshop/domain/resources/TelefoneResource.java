@@ -33,7 +33,7 @@ public class TelefoneResource implements Resource<Telefone, Long> {
     @GET
     @Path("/{id}")
     @Override
-    public Response findById(Long id) {
+    public Response findById(@PathParam( "id" ) Long id) {
         var telefone = service.findById( id );
         if (Objects.isNull( telefone )) return Response.status( 404 ).build();
         return Response.ok( telefone ).build();

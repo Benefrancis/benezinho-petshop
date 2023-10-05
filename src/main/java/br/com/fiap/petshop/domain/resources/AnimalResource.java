@@ -33,7 +33,7 @@ public class AnimalResource implements Resource<Animal, Long> {
     @GET
     @Path("/{id}")
     @Override
-    public Response findById(Long id) {
+    public Response findById(@PathParam( "id" ) Long id) {
         var animal = service.findById( id );
         if (Objects.isNull( animal )) return Response.status( 404 ).build();
         return Response.ok( animal ).build();

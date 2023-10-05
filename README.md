@@ -75,6 +75,7 @@ Alterar o arquivo contido em documentacao/equipe.txt para incluir os RMs e nomes
    Lembre-se que:
 
    1. Existe Hernaça entre **Servico**, **Banho**, **Consulta** e **Tosa**
+   2. Existe relacionamento Muitos para Um entre  Servico e Animal no atributo animal.
 
 1. **(1,5 Pontos)** adicionar corretamente as anotações JPA na classe **Documento**.
 
