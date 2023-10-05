@@ -22,7 +22,7 @@ import java.net.URI;
 public class Main {
     public static final String BASE_URI = "http://localhost/api/";
 
-    public static final String PERSISTENCE_UNIT = "maria-db";
+    public static final String PERSISTENCE_UNIT = "oracle-fiap";
 
     @PersistenceContext
     static EntityManager manager;

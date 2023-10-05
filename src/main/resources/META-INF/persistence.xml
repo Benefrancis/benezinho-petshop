@@ -29,8 +29,8 @@
             <property name="jakarta.persistence.provider" value="org.hibernate.jpa.HibernatePersistenceProvider" />
             <property name="jakarta.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL" />
-            <property name="jakarta.persistence.jdbc.user" value="" />
-            <property name="jakarta.persistence.jdbc.password" value="" />
+            <property name="jakarta.persistence.jdbc.user" value="rm96384" />
+            <property name="jakarta.persistence.jdbc.password" value="200494" />
             <!--hibernate-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>

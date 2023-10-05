@@ -1,7 +1,10 @@
 package br.com.fiap.petshop.domain.repository;
 
 import br.com.fiap.petshop.domain.entity.Documento;
+import br.com.fiap.petshop.domain.entity.animal.Animal;
+import br.com.fiap.petshop.domain.entity.servico.Servico;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,31 +35,53 @@ public class DocumentoRepository implements Repository<Documento, Long> {
 
     @Override
     public List<Documento> findAll() {
-        return null;
+        List<Documento> list = manager.createQuery("FROM Documento").getResultList();
+        return list;
     }
 
     @Override
     public Documento findById(Long id) {
-        return null;
+        Documento documento = manager.find(Documento.class, id);
+        return documento;
     }
 
     @Override
     public List<Documento> findByTexto(String texto) {
-        return null;
+        String jpql = "SELECT d FROM Documento d  where lower(d.numero) LIKE CONCAT('%',lower(:nome),'%')";
+        Query query = manager.createQuery(jpql);
+        query.setParameter("nome", texto);
+        List<Documento> list = query.getResultList();
+        return list;
     }
 
     @Override
     public Documento persist(Documento documento) {
-        return null;
+        manager.getTransaction().begin();
+        manager.persist(documento);
+        manager.getTransaction().commit();
+        return documento;
     }
 
     @Override
     public Documento update(Documento documento) {
-        return null;
+        manager.getTransaction().begin();
+        documento = manager.merge(documento);
+        manager.getTransaction().commit();
+
+        return documento;
     }
 
     @Override
     public boolean delete(Documento documento) {
-        return false;
+        manager.getTransaction().begin();
+        try {
+            documento = manager.merge(documento);
+            manager.remove(documento);
+            manager.getTransaction().commit();
+            return true; // Indica que a exclusão foi bem-sucedida
+        } catch (Exception e) {
+            manager.getTransaction().rollback();
+            return false; // Indica que a exclusão falhou
+        }
     }
 }

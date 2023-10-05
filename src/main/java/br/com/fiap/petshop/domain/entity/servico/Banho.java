@@ -1,10 +1,16 @@
 package br.com.fiap.petshop.domain.entity.servico;
 
 import br.com.fiap.petshop.domain.entity.animal.Animal;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "TB_BANHO")
+@DiscriminatorValue("B")
 public class Banho extends Servico{
     public Banho() {
     }

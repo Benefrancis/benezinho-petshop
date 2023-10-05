@@ -5,6 +5,7 @@ import br.com.fiap.petshop.domain.entity.animal.Animal;
 import br.com.fiap.petshop.infra.database.EntityManagerFactoryProvider;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,31 +36,56 @@ public class AnimalRepository implements Repository<Animal, Long> {
 
     @Override
     public List<Animal> findAll() {
-        return null;
+        List<Animal> list = manager.createQuery("FROM Animal").getResultList();
+        return list;
     }
 
     @Override
     public Animal findById(Long id) {
-        return null;
+        Animal animal = manager.find(Animal.class, id);
+        return animal;
     }
 
     @Override
     public List<Animal> findByTexto(String texto) {
-        return null;
+        String jpql = "SELECT a FROM Animal a where lower(a.nome) LIKE CONCAT('%',lower(:nome),'%')";
+        Query query = manager.createQuery( jpql );
+        query.setParameter( "nome", texto );
+        List<Animal> list = query.getResultList();
+        return list;
     }
 
     @Override
     public Animal persist(Animal animal) {
-        return null;
+        manager.getTransaction().begin();
+        manager.persist(animal);
+        manager.getTransaction().commit();
+        return animal;
     }
 
     @Override
     public Animal update(Animal animal) {
-        return null;
+        manager.getTransaction().begin();
+        animal = manager.merge(animal);
+        manager.getTransaction().commit();
+
+        return animal;
     }
+
 
     @Override
     public boolean delete(Animal animal) {
-        return false;
+        manager.getTransaction().begin();
+        try {
+            animal = manager.merge(animal);
+            manager.remove(animal);
+            manager.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            manager.getTransaction().rollback();
+            return false;
+        }
     }
+
+
 }
