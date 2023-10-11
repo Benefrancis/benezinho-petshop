@@ -11,33 +11,65 @@ import java.util.Collections;
 import java.util.Set;
 
 
-
+@Entity
+@Table(name = "TB_ANIMAL")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Animal {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_ANIMAL")
+    @SequenceGenerator(name = "SQ_ANIMAL", sequenceName = "SQ_ANIMAL", allocationSize = 1)
+    @Column(name = "ID_ANIMAL")
     private Long id;
 
-
+    @Column(name = "NM_ANIMAL")
     private String nome;
 
+    @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
+    @Column(name = "DT_NASCIMENTO")
     private LocalDate nascimento;
 
     private String raca;
 
-
+    @Column(name = "DS_ANIMAL")
     private String descricao;
 
     private String observacao;
 
-
+    @Column(name = "TP_ANIMAL")
     private String tipo;
 
 
-
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "DONO",
+            referencedColumnName = "ID_PESSOA",
+            foreignKey = @ForeignKey(name = "TB_ANIMAL_FK_DONO")
+    )
     private Pessoa dono;
 
+
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(
+//            name = "TB_ANIMAL_SERVICO",
+//            joinColumns = {
+//                    @JoinColumn(
+//                            name = "ANIMAL",
+//                            referencedColumnName = "ID_ANIMAL",
+//                            foreignKey = @ForeignKey(name = "TB_ANIMAL_SERVICO_FK_ANIMAL")
+//                    )
+//            },
+//            inverseJoinColumns = {
+//                    @JoinColumn(
+//                            name = "SERVICO",
+//                            referencedColumnName = "ID_SERVICO",
+//                            foreignKey = @ForeignKey(name = "TB_ANIMAL_SERVICO_FK_SERVICO")
+//                    )
+//            }
+//    )
+//    private Set<Servico> servicos = new LinkedHashSet<>();
 
 
     public Animal() {

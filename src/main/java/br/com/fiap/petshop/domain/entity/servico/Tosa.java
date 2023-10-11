@@ -8,7 +8,9 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-
+@Entity
+@Table(name = "TB_TOSA")
+@DiscriminatorValue( "TOSA" )
 public class Tosa extends Servico {
 
     public Tosa() {

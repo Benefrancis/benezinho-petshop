@@ -10,7 +10,9 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.Set;
 
-
+@Entity
+@Table(name = "TB_GATO")
+@DiscriminatorValue("GATO")
 public class Gato extends Animal {
 
     public Gato() {

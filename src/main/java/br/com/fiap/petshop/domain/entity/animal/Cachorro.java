@@ -12,7 +12,9 @@ import java.time.LocalDate;
 import java.util.Set;
 
 
-
+@Entity
+@Table(name = "TB_CACHORRO")
+@DiscriminatorValue( "CACHORRO" )
 public class Cachorro extends Animal{
 
     public Cachorro() {

@@ -3,19 +3,28 @@ package br.com.fiap.petshop.domain.entity;
 import br.com.fiap.petshop.infra.security.entity.Pessoa;
 import jakarta.persistence.*;
 
-
+@Entity
+@Table(name = "TB_TELEFONE")
 public class Telefone {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_TELEFONE")
+    @SequenceGenerator( name = "SQ_TELEFONE", sequenceName = "SQ_TELEFONE", allocationSize = 1)
+    @Column(name = "ID_TELEFONE")
     private Long id;
 
-
+    @Column(name = "DDD", nullable = false)
     private int ddd;
 
-
+    @Column(name = "NUMERO", nullable = false)
     private String numero;
 
-
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "PESSOA",
+            referencedColumnName = "ID_PESSOA",
+            foreignKey = @ForeignKey(name = "TB_TELEFONE_FK_PESSOA")
+    )
     private Pessoa pessoa;
 
     public Telefone() {
